@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: web-app
+
+server:
+  port: 8084
+
+zuul:
+  routes:
+    book-service:
+      path: /api/books/**
+      serviceId: book-service
+
