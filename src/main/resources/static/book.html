@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+        $(document).ready(function() {
+            $.ajax({
+                url: '/api/books/books/'+$.urlParam('id')
+            }).then(function(data) {
+                $('#txtID').append(data.id);
+                $('.txtName').append(data.name);
+                document.getElementsById('txtName').innerHTML=data.name;
+                $('.txtISBN').append(data.isbn);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Books</h1>
+    <br/><br/>
+    <table border="1" cellpadding="10" id="list_books">
+        <thead>
+        <tr>
+            <td>ID</td>
+            
+            <td><p id="txtID"></p></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" id="txtName" class="txtName"></td>
+        </tr>
+        <tr>
+            <td>ISBN</td>
+            <td><input type="text" id="txtISBN" name="txtISBN"></td>
+        </tr>
+    </table>
+</body>
+</html>

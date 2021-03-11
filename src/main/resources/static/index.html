@@ -2,51 +2,35 @@
 <html>
 <head>
     <title>HTML Tutorial</title>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: '/api/books/books',
+            type: 'GET',
+            success: function (response) {
+                var trHTML = '';
+                $.each(response, function (i, item) {
+                    trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.isbn + '</td><td>' + '<a href="./book.html?id='+item.id+'" >Xem</a>' + '</td></tr>';
+                });
+                $('#list_books').append(trHTML);
+            }
+        });
+    </script>
 </head>
 
 <body>
 <div align="center">
     <h1>Books List</h1>
     <br/><br/>
-<!--    <table border="1" cellpadding="10">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Book ID</th>-->
-<!--            <th>Name</th>-->
-<!--            <th>ISBN</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--                    <tr th:each="book : ${listBook}">-->
-<!--                    	<td th:text="${book.id}">Product ID</td>-->
-<!--                        <td th:text="${book.name}">Name</td>-->
-<!--                        <td th:text="${book.ISBN}">Brand</td>-->
-<!--                        <td>-->
-<!--                        	<a th:href="@{'/edit/' + ${product.id}}">Edit</a>-->
-<!--                        	&nbsp;&nbsp;&nbsp;-->
-<!--                        	<a th:href="@{'/delete/' + ${product.id}}">Delete</a>-->
-<!--                        </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-    <div id="demo">
-        <button type="button" onclick="loadDoc()">Change Content</button>
-    </div>
-        
-    <script>
-    function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerHTML =
-            this.responseText;
-        }
-        };
-        xhttp.open("GET", "/api/books/books/1", true);
-        xhttp.send();
-    }
-    </script>
+    <table border="1" cellpadding="10" id="list_books">
+        <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Name</th>
+            <th>ISBN</th>
+            <th>Xem</th>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
