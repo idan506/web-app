@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Tutorial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: '/api/books/books',
+            type: 'GET',
+            success: function (response) {
+                var trHTML = '';
+                $.each(response, function (i, item) {
+                    trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.isbn + '</td><td>' + item.sortDescription + '</td><td>' + item.author + '</td><td>' + item.dateOfHire + '</td><td>' + item.expirationDay + '</td><td>' + item.status + '</td><td>' + '<a href="./book.html?id='+item.id+'" >Xem</a>' + '</td></tr>';
+                });
+                $('#list_books').append(trHTML);
+            }
+        });
+    </script>
+</head>
+
+<body>
+<div align="center">
+    <h1>Books List</h1>
+    <br/><br/>
+    <table border="1" cellpadding="10" id="list_books">
+        <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Name</th>
+            <th>ISBN</th>
+            <th>Xem</th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
