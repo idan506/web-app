@@ -387,30 +387,45 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Book Detail</h6>
                         </div>
-                        <div class="">
-                            <div class="form-group">
+                        <div class="app">
+                            <!-- <div class="form-group">
                                 <label class="col-md-4 control-label" for="product_id">ID BOOK</label>  
                                 <div class="col-md-8">
-                                    <input id="book_id" name="book_id" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    <input id="id" name="book_id" placeholder="" class="form-control input-md" required="" type="text">                                  
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="product_id">Name</label>  
                                 <div class="col-md-8">
-                                    <input id="book_name" name="book_name" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    <input id="name" name="book_name" placeholder="" class="form-control input-md" required="" type="text">                                  
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="product_id">ISBN</label>  
                                 <div class="col-md-8">
-                                    <input id="book_isbn" name="book_isbn" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    <input id="isbn" name="book_isbn" placeholder="" class="form-control input-md" required="" type="text">                                  
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="product_id">Author</label>  
                                 <div class="col-md-8">
-                                    <input id="book_author" name="book_author" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    <input id="author" name="book_author" placeholder="" class="form-control input-md" required="" type="text">                                  
                                 </div>
+                            </div> -->
+                            <div class="app">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="product_id">Name</label>  
+                                    <div class="col-md-8">
+                                        <input id="name" name="book_name" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="product_id">ISBN</label>  
+                                    <div class="col-md-8">
+                                        <input id="isbn" name="book_isbn" placeholder="" class="form-control input-md" required="" type="text">                                  
+                                    </div>
+                                </div>
+                                <button class="btn btn-dark" id="btnCreate">Create new book</button>
                             </div>
                         </div>
                     </div>
@@ -478,7 +493,25 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-
+    <script>
+        $('#btnCreate').click(() => {
+            let dataToPost = {
+                name: document.getElementById("name").value,
+                isbn: document.getElementById("isbn").value,
+                status:true
+            };
+            $.ajax({
+                url: '/api/books',
+                type: 'POST',
+                dataType: 'json',
+                contentType : 'application/json',
+                data: JSON.stringify(dataToPost),
+                success: (response) => {
+                    window.location='/admin/tables.html';
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>

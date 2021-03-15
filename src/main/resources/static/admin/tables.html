@@ -25,19 +25,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-    <script>
-        $.ajax({
-            url: '/api/books/books',
-            type: 'GET',
-            success: function (response) {
-                var trHTML = '';
-                $.each(response, function (i, item) {
-                    trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.isbn + '</td><td>' + item.sortDescription + '</td><td>' + item.author + '</td><td>' + item.dateOfHire + '</td><td>' + item.expirationDay + '</td><td>' + item.status + '</td><td>' + '<a href="./bookdetail.html?id='+item.id+'" >Edit</a>'+ '<a href="./bookdetail.html?id='+item.id+'" >Delete</a>' + '</td></tr>';
-                });
-                $('#dataTable').append(trHTML);
-            }
-        });
-    </script>
+    
 
 </head>
 
@@ -386,6 +374,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Book</h6>
+                            <a href="/admin/bookdetail.html">Create new book</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -486,5 +475,38 @@
     <script src="js/demo/datatables-demo.js"></script>
 
 </body>
-
+<script>
+    $.ajax({
+        url: '/api/books',
+        type: 'GET',
+        success: function (response) {
+            var trHTML = '';
+            $.each(response, function (i, item) {
+                trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' 
+                    + item.isbn + '</td><td>' + item.sortDescription + '</td><td>' 
+                        + item.author + '</td><td>' + item.dateOfHire + '</td><td>' + item.expirationDay + '</td><td id="tr-status">' + item.status +
+                         '</td><td>' + '<a class="btn btn-dark" href="./bookdetail.html?id='+item.id+'" >Edit</a>'+
+                             '<button class="btn btn-dark" onclick="deleteBtn('+item.id+')" id="btnDelete" value="'+item.id+'">Delete</button>' + '</td></tr>';
+            });
+            $('#dataTable').append(trHTML);
+        }
+    });
+    const deleteBtn = (id) => {
+            console.log(id);
+            let dataToPost = {
+            status: false,
+            id: id,
+        };
+        $.ajax({
+            url: '/api/books',
+            type: 'PUT',
+            dataType: 'json',
+            contentType : 'application/json',
+            data: JSON.stringify(dataToPost),
+            success: (response) => {
+                window.location='/admin/tables.html';
+            }
+        });
+    }
+</script>
 </html>
