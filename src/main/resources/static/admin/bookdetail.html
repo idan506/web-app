@@ -24,20 +24,6 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-        $.urlParam = function(name){
-            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            return results[1] || 0;
-        }
-        $(document).ready(function() {
-            $.ajax({
-                url: '/api/books/books/'+$.urlParam('id')
-            }).then(function(data) {
-                $('#book_id').append(data.id);
-                $('.book_name').append(data.name);
-            });
-        });
-    </script>
 
 </head>
 
@@ -498,7 +484,9 @@
             let dataToPost = {
                 name: document.getElementById("name").value,
                 isbn: document.getElementById("isbn").value,
-                status:true
+                publishing_year: 1,
+                status:true,
+                flag: true
             };
             $.ajax({
                 url: '/api/books',

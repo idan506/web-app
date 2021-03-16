@@ -386,25 +386,10 @@
                                             <th>ISBN</th>
                                             <th>Sort Description</th>
                                             <th>Author</th>
-                                            <th>Date of hire</th>
-                                            <th>Expiration Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>ISBN</th>
-                                            <th>Sort Description</th>
-                                            <th>Author</th>
-                                            <th>Date of hire</th>
-                                            <th>Expiration Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -484,8 +469,8 @@
             $.each(response, function (i, item) {
                 trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' 
                     + item.isbn + '</td><td>' + item.sortDescription + '</td><td>' 
-                        + item.author + '</td><td>' + item.dateOfHire + '</td><td>' + item.expirationDay + '</td><td id="tr-status">' + item.status +
-                         '</td><td>' + '<a class="btn btn-dark" href="./bookdetail.html?id='+item.id+'" >Edit</a>'+
+                        + item.author + '</td><td>' + item.status +
+                         '</td><td>' + '<a class="btn btn-dark" href="./book.html?id='+item.id+'" >Edit</a>'+
                              '<button class="btn btn-dark" onclick="deleteBtn('+item.id+')" id="btnDelete" value="'+item.id+'">Delete</button>' + '</td></tr>';
             });
             $('#dataTable').append(trHTML);
@@ -494,12 +479,12 @@
     const deleteBtn = (id) => {
             console.log(id);
             let dataToPost = {
-            status: false,
-            id: id,
+            id: id
         };
+        console.log(dataToPost);
         $.ajax({
             url: '/api/books',
-            type: 'PUT',
+            type: 'DELETE',
             dataType: 'json',
             contentType : 'application/json',
             data: JSON.stringify(dataToPost),
