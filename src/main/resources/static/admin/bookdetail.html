@@ -479,27 +479,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-    <script>
-        $('#btnCreate').click(() => {
-            let dataToPost = {
-                name: document.getElementById("name").value,
-                isbn: document.getElementById("isbn").value,
-                publishing_year: 1,
-                status:true,
-                flag: true
-            };
-            $.ajax({
-                url: '/api/books',
-                type: 'POST',
-                dataType: 'json',
-                contentType : 'application/json',
-                data: JSON.stringify(dataToPost),
-                success: (response) => {
-                    window.location='/admin/tables.html';
-                }
-            });
-        })
-    </script>
+    <script src="js/createbook.js"></script>
 </body>
 
 </html>

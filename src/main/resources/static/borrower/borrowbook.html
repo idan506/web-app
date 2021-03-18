@@ -92,10 +92,10 @@
                 idBook: $.urlParam('id'),
                 isbn: document.getElementById("isbn").innerHTML,
                 idUser: $.urlParam('id'),
+                status: true,
                 dayOfHire: new Date()
             };
-            const postData = ()=>{
-                    $.ajax({
+            $.ajax({
                     url: '/api/books/ticket',
                     type: 'POST',
                     dataType: 'json',
@@ -105,7 +105,6 @@
                         window.location = '/borrower/borrow.html';
                     }
                 });
-            }
         })
     </script>
     

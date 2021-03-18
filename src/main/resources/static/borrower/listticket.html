@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" border="1">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Day of hire</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+        url: '/api/books/ticket/list',
+        type: 'GET',
+        success: function (response) {
+            var trHTML = '';
+            $.each(response, function (i, item) {
+                trHTML += '<tr><td>' + item.id + '</td><td>'
+                    + item.isbn + '</td><td>' + item.dayOfHire + '</td><td>'+
+                   '<a class="btn btn-dark" href="./checkout.html?id='+item.id+'" id="btnCheckout" >Check out</a>' + '</td></tr>';
+                });
+            $('#dataTable').append(trHTML);
+        }
+        });
+
+    </script>
+</body>
+</html>
