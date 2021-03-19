@@ -16,6 +16,7 @@
   <!-- Custom styles for this template -->
   <link href="css/shop-item.css" rel="stylesheet">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -62,7 +63,7 @@
       <div class="col-lg-9">
           <br/>
         <h3>Your list</h3>
-        <table class="table">
+        <table class="table" id="dataTable">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Name</th>
@@ -72,29 +73,6 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
           </table>
         
 
@@ -117,7 +95,37 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script>
+    $.ajax({
+      url: '/api/books/ticket/list',
+      type: 'GET',
+      success: function (response) {
+          var trHTML = '';
+            $.each(response, function (i, item) {
+                trHTML += '<tr><td>' + item.name + '</td><td>' 
+                    + item.isbn + '</td><td>' + item.dateOfHire + '</td><td>'  + item.status + '</td><td>' +
+                     '<button class="btn btn-danger" onclick="btnCheckout('+item.id+')" id="btnCheckout" value="'+item.id+'">Check out</button>' + '</td></tr>';
+            });
+          $('#dataTable').append(trHTML);
+        }
+    });
+    const btnCheckout = (id) => {
+        let dataToPut = {
+            id:id
+        };
+        $.ajax({
+                url: '/api/books/ticket',
+                type: 'PUT',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dataToPut),
+                success: (response) => {
+                    window.location = '/borrower/borrowed.html';
+                }
+        });
+    }
+  </script>
+</script>
 </body>
 
 </html>

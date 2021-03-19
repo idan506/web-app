@@ -54,6 +54,7 @@
         <div class="list-group">
           <a href="#" class="list-group-item active">Home</a>
           <a href="#" class="list-group-item">Your List </a>
+          <a href="#" class="list-group-item">Done </a>
         </div>
       </div>
       <!-- /.col-lg-3 -->
@@ -63,12 +64,13 @@
         <div class="card mt-4">
           <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
           <div class="card-body">
-            <h3 class="card-title">Product Name</h3>
-            <h4>$24.99</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-          <button class="btn btn-success">Submit</button>
+            <h3 class="card-title" id="name"></h3>
+            <h4 id="author">Author:&nbsp; </h4>
+            <h6 id="publishYear">Pulish year:&nbsp;</h6>
+            <p class="card-text" id="shortDescription"></p>
+            <input type="hidden" id="isbn"/>
+          <button class="btn btn-success" id="submitBtn">Submit</button>
           </div>
-          
         </div>
         
 
@@ -91,6 +93,43 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $.urlParam = function (param) {
+        var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
+        return results[1] || 0;
+    }
+    $.ajax({
+        url: '/api/books/' + $.urlParam('id'),
+        type: 'GET',
+        success: function (response) {
+            $("#name").append(response.name);
+            $("#author").append(response.author);
+            $("#publishYear").append(response.publishYear);
+            $("#shortDescription").append(response.shortDescription);
+            document.getElementById("isbn").value=response.isbn;
+        }
+    });
+    $('#submitBtn').click(() => {
+        let dataToPost = {
+            idBook: $.urlParam('id'),
+            isbn: document.getElementById("isbn").value,
+            idUser: 3,
+            status: false,
+            dayOfHire: new Date()
+        };
+        $.ajax({
+                url: '/api/books/ticket',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dataToPost),
+                success: (response) => {
+                    window.location = '/borrower/list.html';
+                }
+            });
+    })
+</script>
+  
 
 </body>
 

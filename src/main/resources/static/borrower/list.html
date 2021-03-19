@@ -51,9 +51,12 @@
 
         <h1 class="my-4">LIBRARY</h1>
         <div class="list-group">
-          <a href="#" class="list-group-item">Library 1</a>
-          <a href="#" class="list-group-item">Library 2</a>
-          <a href="#" class="list-group-item">Library 3</a>
+          <a href="#" class="list-group-item active">Home</a>
+          <a href="#" class="list-group-item">Your List </a>
+          <a href="#" class="list-group-item">Done </a>
+        </div>
+        <div class="">
+          <button onclick="checkboxabc()">Borrow</button>
         </div>
 
       </div>
@@ -88,88 +91,7 @@
           </a>
         </div>
 
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <a href="./bookdetail.html">Borrow</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Two</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Three</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Four</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Five</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Six</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-            </div>
-          </div>
+        <div class="row" id="app">
 
         </div>
         <!-- /.row -->
@@ -194,7 +116,49 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let books;
+    $.ajax({
+    url: '/api/books/borrow',
+    type: 'GET',
+    success: function (response) {
+        var trHTML = '';
+        books = response;
+        $.each(response, function (i, item) {
+            trHTML +=  `
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="/borrower/bookdetail.html?id=${item.id}">${item.name}</a>
+                </h4>
+                <h5>Author: ${item.author}</h5>
+                <h6>Publish year: ${item.publishYear}</h6>
+                <p class="card-text">${item.shortDescription}</p>
+              </div>
+              <div class="card-foot">
+                <input class="form-check-input" type="checkbox" id="checkbox${item.id}" value="${item.id}" aria-label="...">
+              </div>
+            </div>
+          </div>`;
+            });
+        $("#app").append(trHTML);
 
+    }
+    });
+    
+    const checkboxabc = () => {
+      let ids =[];
+      $.each(books, function(i,book) {
+        if($("#checkbox" + book.id)[0].checked===true){
+          ids.push({"id": book.id});
+        }
+      });
+       
+    }
+
+</script>
 </body>
 
 </html>
