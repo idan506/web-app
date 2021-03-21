@@ -29,4 +29,34 @@
                 window.location='/admin/books-list.html';
             }
         });
-    }
+    };
+
+    $("#btnSearch").click(() => {
+
+        let dataToSearch = {
+            name: document.getElementById("searchName").value,
+            isbn: document.getElementById("searchISBN").value,
+            publishYear: document.getElementById("searchPublishYear").value,
+            author: document.getElementById("searchAuthor").value,
+            shortDescription: document.getElementById("searchShortDescription").value
+        }
+
+        $.ajax({
+            url: '/api/books/search',
+            type:'GET',
+            dataType:'json',
+            contentType:'application/json',
+            data: JSON.stringify(dataToSearch),
+            success: (response) => {
+                var trHTML = '';
+                $.each(response, function (i, item) {
+                    trHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' 
+                        + item.isbn + '</td><td>' + item.publishYear + '</td><td style="font-size: small;">'  + item.shortDescription + '</td><td>' 
+                            + item.author + '</td><td>' + item.status +
+                                '</td><td>' + '<a class="btn btn-dark" href="./editbook.html?id='+item.id+'" >Edit</a>'+'&nbsp;'+
+                                    '<button class="btn btn-danger" onclick="deleteBtn('+item.id+')" id="btnDelete" value="'+item.id+'">Delete</button>' + '</td></tr>';
+                });
+                $('#dataTable').append(trHTML);
+            }
+        })
+    })

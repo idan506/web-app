@@ -56,7 +56,7 @@
           <a href="#" class="list-group-item">Done </a>
         </div>
         <div class="">
-          <button onclick="checkboxabc()">Borrow</button>
+          <button id="btnBorrow">Borrow</button>
         </div>
 
       </div>
@@ -117,13 +117,13 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-    let books;
+    let listIdBooks;
     $.ajax({
     url: '/api/books/borrow',
     type: 'GET',
     success: function (response) {
         var trHTML = '';
-        books = response;
+        listIdBooks = response;
         $.each(response, function (i, item) {
             trHTML +=  `
             <div class="col-lg-4 col-md-6 mb-4">
@@ -147,16 +147,31 @@
 
     }
     });
-    
-    const checkboxabc = () => {
+    $('#btnBorrow').click(() => {
       let ids =[];
-      $.each(books, function(i,book) {
-        if($("#checkbox" + book.id)[0].checked===true){
-          ids.push({"id": book.id});
-        }
-      });
-       
-    }
+        $.each(listIdBooks, function(i,book) {
+          if($("#checkbox" + book.id)[0].checked===true){
+            ids.push({"id": book.id});
+          }
+        });
+      let dataToPost = {
+          books: ids,
+          isbn: document.getElementById("isbn").value,
+          idUser: 3,
+          status: false,
+          dayOfHire: new Date()
+      };
+      $.ajax({
+              url: '/api/books/ticket',
+              type: 'POST',
+              dataType: 'json',
+              contentType: 'application/json',
+              data: JSON.stringify(dataToPost),
+              success: (response) => {
+                  window.location = '/borrower/list.html';
+              }
+          });
+  })
 
 </script>
 </body>
