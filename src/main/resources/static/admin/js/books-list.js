@@ -36,14 +36,16 @@
         let dataToSearch = {
             name: document.getElementById("searchName").value,
             isbn: document.getElementById("searchISBN").value,
-            publishYear: document.getElementById("searchPublishYear").value,
+            publishYear: document.getElementById("searchPublishYear").value ? parseInt(document.getElementById("searchPublishYear").value) : "",
             author: document.getElementById("searchAuthor").value,
             shortDescription: document.getElementById("searchShortDescription").value
         }
 
+        console.log(dataToSearch);
+
         $.ajax({
             url: '/api/books/search',
-            type:'GET',
+            type:'POST',
             dataType:'json',
             contentType:'application/json',
             data: JSON.stringify(dataToSearch),
@@ -56,6 +58,8 @@
                                 '</td><td>' + '<a class="btn btn-dark" href="./editbook.html?id='+item.id+'" >Edit</a>'+'&nbsp;'+
                                     '<button class="btn btn-danger" onclick="deleteBtn('+item.id+')" id="btnDelete" value="'+item.id+'">Delete</button>' + '</td></tr>';
                 });
+
+                $('#dataTable').empty();
                 $('#dataTable').append(trHTML);
             }
         })

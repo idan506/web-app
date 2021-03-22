@@ -10,4 +10,3 @@ zuul:
     book-service:
       path: /api/books/**
       serviceId: book-service
-
