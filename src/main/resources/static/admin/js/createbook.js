@@ -5,10 +5,11 @@
                 isbn: document.getElementById("isbn").value,
                 publishing_year: document.getElementById("publishing_year").value,
                 author: document.getElementById("author").value,
-                short_descprition: document.getElementById("short_descprition").value,
+                shortDescription: document.getElementById("shortDescrpition").value,
                 status:true,
                 flag: true
             };
+            console.log(dataToPost);
             $.ajax({
                 url: '/api/books',
                 type: 'POST',
@@ -19,4 +20,5 @@
                     window.location='/admin/books-list.html';
                 }
             });
+
         })

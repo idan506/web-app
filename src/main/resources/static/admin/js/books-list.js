@@ -38,7 +38,9 @@
             isbn: document.getElementById("searchISBN").value,
             publishYear: document.getElementById("searchPublishYear").value ? parseInt(document.getElementById("searchPublishYear").value) : "",
             author: document.getElementById("searchAuthor").value,
+            totalNumberTicket: document.getElementById("searchTotalTichket").value ? parseInt(document.getElementById("searchTotalTichket").value) : "",
             shortDescription: document.getElementById("searchShortDescription").value
+            
         }
 
         console.log(dataToSearch);

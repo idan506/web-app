@@ -53,8 +53,8 @@
       <div class="col-lg-3">
         <h1 class="my-4">Library</h1>
         <div class="list-group">
-          <a href="#" class="list-group-item ">Home</a>
-          <a href="#" class="list-group-item active">Your List </a>
+          <a href="list.html" class="list-group-item ">Home</a>
+          <a href="bookdetail.html" class="list-group-item active">Your List </a>
           <a href="#" class="list-group-item ">Done </a>
         </div>
       </div>
@@ -66,16 +66,13 @@
         <table class="table" id="dataTable">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">ISBN</th>
+                <th scope="col">Books</th>
                 <th scope="col">Day Of Hire</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
           </table>
-        
-
       </div>
       <!-- /.col-lg-9 -->
 
@@ -102,8 +99,8 @@
       success: function (response) {
           var trHTML = '';
             $.each(response, function (i, item) {
-                trHTML += '<tr><td>' + item.name + '</td><td>' 
-                    + item.isbn + '</td><td>' + item.dateOfHire + '</td><td>'  + item.status + '</td><td>' +
+                trHTML += '<tr><td>' 
+                    + 111 + '</td><td>' + item.dateOfHire + '</td><td>'  + item.status + '</td><td>' +
                      '<button class="btn btn-danger" onclick="btnCheckout('+item.id+')" id="btnCheckout" value="'+item.id+'">Check out</button>' + '</td></tr>';
             });
           $('#dataTable').append(trHTML);
