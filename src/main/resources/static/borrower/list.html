@@ -56,36 +56,48 @@
           <a href="borrowed.html" class="list-group-item">Your List </a>
           <a href="#" class="list-group-item">Done </a>
         </div>
-        <div class="">
-          <button id="btnBorrow">Borrow</button>
-        </div>
 
       </div>
       <!-- /.col-lg-3 -->
-
+      
       <div class="col-lg-9">
         <div class="row">
-          <div class="card-header py-3">
-            <input class="m-0 text-primary" placeholder="Search title" id="searchName">
+
+          <div class="input-group col-md-3 py-3">
+            <input type="search" class="form-control rounded" placeholder="Search title" aria-label="Search"
+              aria-describedby="search-addon" id="searchName"/>
           </div>
-          <div class="card-header py-3">
-            <input class="m-0 font-weight-bold text-primary" placeholder="Search ISBN" id="searchISBN">
+          <div class="input-group col-md-3 py-3">
+            <input type="search" class="form-control rounded" placeholder="Search ISBN" aria-label="Search"
+              aria-describedby="search-addon" id="searchISBN"/>
           </div>
-          <div class="card-header py-3">
-            <input class="m-0 font-weight-bold text-primary" placeholder="Search publish year" id="searchPublishYear">
+          <div class="input-group col-md-3 py-3">
+            <input type="search" class="form-control rounded" placeholder="Search Publish Year" aria-label="Search"
+              aria-describedby="search-addon" id="searchPublishYear"/>
           </div>
-          <div class="card-header py-3">
-            <input class="m-0 font-weight-bold text-primary" placeholder="Search author" id="searchAuthor">
+          <div class="input-group col-md-3 py-3">
+            <input type="search" class="form-control rounded" placeholder="Search author" aria-label="Search"
+              aria-describedby="search-addon" id="searchAuthor"/>
           </div>
-          <div class="card-header py-3">
-            <input class="m-0 font-weight-bold text-primary" placeholder="Search total Ticket" id="searchTotalTichket">
+          <div class="input-group col-md-3 py-3">
+            <input type="search" class="form-control rounded" placeholder="Search total ticket" aria-label="Search"
+              aria-describedby="search-addon" id="searchTotalTichket"/>
           </div>
-          <div class="card-header py-3">
-            <textarea class="m-0 font-weight-bold text-primary" placeholder="Search short description"
-              id="searchShortDescription"></textarea>
+
+          <div class="input-group col-md-6 py-3">
+            <textarea class="form-control rounded" placeholder="Search short description" aria-label="Search"
+              aria-describedby="search-addon" id="searchShortDescription" rows="1"></textarea>
           </div>
-          <div class="card-header py-3">
-            <button class="btn-check" id="btnSearch">Search</button>
+          <div class="input-grou col-md-1 py-3" >
+            <button type="button" class="btn btn-primary" id="btnSearch">
+              Search
+            </button>
+          </div>
+        <div>&nbsp;&nbsp;</div>
+          <div class="input-grou col-md-1 py-3" >
+            <button type="button" class="btn btn-danger" id="btnBorrow">
+              Borrow
+            </button>
           </div>
         </div>
 

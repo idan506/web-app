@@ -64,7 +64,7 @@
                         <h6 class="collapse-header">LIST:</h6>
                         <a class="collapse-item" href="admin/books-list.html">Books</a>
                         <a class="collapse-item" href="admin/User.html">User</a>
-                        <a class="collapse-item" href="admin/User.html">Ticket</a>
+                        <a class="collapse-item" href="admin/tickets-list.html">Ticket</a>
                     </div>
                 </div>
             </li>
@@ -158,8 +158,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -197,42 +196,40 @@
                         <h1 class="h3 mb-0 text-gray-800">Create new book</h1>
                     </div>
                     <div class="app">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >Name</label>  
-                            <div class="col-md-4">
-                                <input id="name" class="form-control input-md" required="" type="text">                                  
-                            </div>
+
+                        <div class="input-group">
+                            <span class="input-group-text">Name</span>
+                            <input id="name" class=" col-md-6" required type="text">
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >ISBN</label>  
-                            <div class="col-md-4">
-                                <input id="isbn" class="form-control input-md" required="" type="text">                                  
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-text">ISBN</span>
+                            <input id="isbn" class="form-control col-md-6" required="" type="text">
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >Author</label>  
-                            <div class="col-md-4">
-                                <input id="author" class="form-control input-md" required="" type="text">                                  
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Author</span>
+
+                            <input id="author" class="col-md-6" required="" type="text">
+
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >Publishing Year</label>  
-                            <div class="col-md-4">
-                                <input id="publishing_year" class="form-control input-md" required="" type="text">                                  
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-text">Publishing Year</span>
+
+                            <input id="publishing_year" class="form-control col-md-6" required="" type="text">
+
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >Quantity</label>  
-                            <div class="col-md-4">
-                                <input id="quantity" class="form-control input-md" required="" type="text">                                  
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-text col-md-1" >Quantity</span>
+
+                            <input id="quantity" class="form-control col-md-6" required="" type="text">
+
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" >Short Description</label>  
-                            <div class="col-md-8">
-                                <textarea class="form-control" rows="5" id="shortDescrpition" name="text"></textarea>                                  
-                            </div>
+
+                        <div class="input-group">
+                            <span class="input-group-text" >Short Description</span>
+                            <textarea class="form-control col-md-6" aria-label="With textarea" id="shortDescrpition"
+                                rows="2"></textarea>
                         </div>
+                        <br />
                         <div class="form-group">
                             <form runat="server">
                                 <input type='file' id="imgInp" />
@@ -247,8 +244,9 @@
             </div>
             <!-- End of Main Content -->
             <div>
-                
+
             </div>
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -302,23 +300,23 @@
     <script src="js/createbook.js"></script>
     <script>
         function readURL(input) {
-        
+
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                
-                reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
                 }
-                
+
                 image = reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
-            }
-            
-            $("#imgInp").change(function() {
+        }
+
+        $("#imgInp").change(function () {
             readURL(this);
         });
     </script>
-    
+
 </body>
 
 </html>

@@ -69,49 +69,6 @@
                     </div>
                 </div>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="#">Login</a>
-                        <a class="collapse-item" href="#">Register</a>
-                        <a class="collapse-item" href="#">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="#">404 Page</a>
-                        <a class="collapse-item" href="#">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -199,35 +156,41 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="row">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="/admin/createbook.html">Create new book</a></h6>
+                        <div class="py-3">
+                            <h6 class=" font-weight-bold text-primary"><a href="/admin/createbook.html">Create new book</a></h6>
                                 
                         </div>
-
-                    </div>
                         <div class="row">
-                            <div class="card-header py-3">
-                                <input class="m-0 text-primary" placeholder="Search title" id="searchName">
-                            </div>
-                            <div class="card-header py-3">
-                                <input class="m-0 font-weight-bold text-primary" placeholder="Search ISBN" id="searchISBN">
-                            </div>
-                            <div class="card-header py-3">
-                                <input class="m-0 font-weight-bold text-primary" placeholder="Search publish year" id="searchPublishYear">
-                            </div>
-                            <div class="card-header py-3">
-                                <input class="m-0 font-weight-bold text-primary" placeholder="Search author" id="searchAuthor">
-                            </div>
-                            <div class="card-header py-3">
-                                <input class="m-0 font-weight-bold text-primary" placeholder="Search total Ticket" id="searchTotalTichket">
-                            </div>
-                            <div class="card-header py-3">
-                                <textarea class="m-0 font-weight-bold text-primary" placeholder="Search short description" id="searchShortDescription"></textarea>
-                            </div>
-                            <div class="card-header py-3">
-                                <button class="btn-check" id="btnSearch">Search</button>
-                            </div>
+                            <div class="input-group col-md-3 py-3">
+                                <input type="search" class="form-control rounded" placeholder="Search title" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchName"/>
+                              </div>
+                              <div class="input-group col-md-3 py-3">
+                                <input type="search" class="form-control rounded" placeholder="Search ISBN" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchISBN"/>
+                              </div>
+                              <div class="input-group col-md-3 py-3">
+                                <input type="search" class="form-control rounded" placeholder="Search Publish Year" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchPublishYear"/>
+                              </div>
+                              <div class="input-group col-md-3 py-3">
+                                <input type="search" class="form-control rounded" placeholder="Search author" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchAuthor"/>
+                              </div>
+                              <div class="input-group col-md-3 py-3">
+                                <input type="search" class="form-control rounded" placeholder="Search total ticket" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchTotalTichket"/>
+                              </div>
+                    
+                              <div class="input-group col-md-6 py-3">
+                                <textarea class="form-control rounded" placeholder="Search short description" aria-label="Search"
+                                  aria-describedby="search-addon" id="searchShortDescription" rows="1"></textarea>
+                              </div>
+                              <div class="input-grou col-md-1 py-3" >
+                                <button type="button" class="btn btn-primary" id="btnSearch">
+                                  Search
+                                </button>
+                              </div>
                 
                         </div>
                         <div class="card-body">
@@ -242,6 +205,7 @@
                                             <th>Short Description</th>
                                             <th>Author</th>
                                             <th>Status</th>
+                                            <th>Quantity</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
