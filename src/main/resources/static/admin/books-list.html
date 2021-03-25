@@ -111,7 +111,19 @@
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
+                        <div class="container unauthenticated">
+                            With GitHub: <a href="/oauth2/authorization/github">click here</a>
+                        </div>
+                        <div class="container authenticated" style="display:none">
+                            Logged in as: <div id="user"></div>
+                        </div>
+                        <script type="text/javascript">
+                            $.get("/user", function(data) {
+                                $("#user").html(data.login);
+                                $(".unauthenticated").hide()
+                                $(".authenticated").show()
+                            });
+                        </script>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"

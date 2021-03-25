@@ -226,10 +226,13 @@
                                 <textarea class="form-control" rows="5" id="shortDescrpition" name="text"></textarea>                                  
                             </div>
                         </div>
+                        <br />
                         <div class="form-group">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                          </div>
+                            <form runat="server">
+                                <input type='file' id="imgInp" />
+                                <img id="blah" src="#" alt="your image" />
+                            </form>
+                        </div>
                         <button class="btn btn-dark" id="submitBtn">Submit</button>
                     </div>
                     

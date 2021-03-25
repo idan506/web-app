@@ -1,6 +1,13 @@
 spring:
   application:
     name: web-app
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: bdcecdabeca8a9a44c64
+            clientSecret: 1ec4b7b08c0f4db08e704dac4b84b79b708bddd1
 
 server:
   port: 8084
@@ -10,3 +17,7 @@ zuul:
     book-service:
       path: /api/books/**
       serviceId: book-service
+
+eureka:
+  client:
+    fetchRegistry: true
