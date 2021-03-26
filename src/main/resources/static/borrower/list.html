@@ -15,6 +15,9 @@
 
   <!-- Custom styles for this template -->
   <link href="css/shop-homepage.css" rel="stylesheet">
+   
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+  
 
 </head>
 
@@ -36,7 +39,17 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
+            <a id="user" class="nav-link"></a>
+          </li>
+          <li>
+            
+            <script type="text/javascript">
+              $.get("/user", function(data) {
+                  $("#user").html(data.name);
+                  $(".unauthenticated").hide()
+                  $(".authenticated").show()
+              });
+          </script>
           </li>
         </ul>
       </div>
@@ -167,7 +180,7 @@
       });
       let dataToPost = {
         books: ids,
-        idUser: 3,
+        idUser: document.getElementById("user").innerHTML,
         status: false,
         dayOfHire: new Date()
       };
@@ -192,7 +205,6 @@
         author: document.getElementById("searchAuthor").value,
         totalNumberTicket: document.getElementById("searchTotalTichket").value ? parseInt(document.getElementById("searchTotalTichket").value) : "",
         shortDescription: document.getElementById("searchShortDescription").value
-
       }
 
       console.log(dataToSearch);
@@ -209,7 +221,7 @@
             trHTML += `
               <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="${item.image}" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="/borrower/bookdetail.html?id=${item.id}">${item.name}</a>

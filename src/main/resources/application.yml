@@ -18,6 +18,11 @@ zuul:
       path: /api/books/**
       serviceId: book-service
 
+    report-service:
+      path: /api/report/**
+      serviceId: report-service
+
+
 eureka:
   client:
     fetchRegistry: true

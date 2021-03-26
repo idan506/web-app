@@ -11,6 +11,7 @@ $.ajax({
         document.getElementById("isbn").value = response.isbn;
         document.getElementById("publishing_year").value = response.publishYear;
         document.getElementById("shortDescrpition").value = response.shortDescription;
+        document.getElementById("image").value = response.image;
     }
 });
 $('#submitBtn').click(() => {

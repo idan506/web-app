@@ -12,11 +12,13 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
@@ -32,25 +34,29 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN")
-                .antMatchers("/borrower/**").hasAnyRole("ROLE_USER")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/borrower/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login().userInfoEndpoint()
                 .userAuthoritiesMapper(this.userAuthoritiesMapper())
-                .and().successHandler(new AuthenticationSuccessHandler() {
+                .and().successHandler(this.authenticationSuccessHandler());
+    }
+
+    private AuthenticationSuccessHandler authenticationSuccessHandler(){
+        return new AuthenticationSuccessHandler() {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
                 Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
                 if (roles.contains("ROLE_ADMIN")) {
-                    redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,"/admin/books-list.html");
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
+                } else {
+                    redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/borrower/list.html");
                 }
-                else
-                    redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,"/borrower/list.html");
-
             }
-        });
+        };
     }
 
     private GrantedAuthoritiesMapper userAuthoritiesMapper() {
@@ -58,17 +64,19 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
             authorities.forEach(authority -> {
-                 if (OAuth2UserAuthority.class.isInstance(authority)) {
-                    OAuth2UserAuthority oauth2UserAuthority = (OAuth2UserAuthority)authority;
+                if (OAuth2UserAuthority.class.isInstance(authority)) {
+                    OAuth2UserAuthority oauth2UserAuthority = (OAuth2UserAuthority) authority;
 
                     Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
 
                     // Map the attributes found in userAttributes
                     // to one or more GrantedAuthority's and add it to mappedAuthorities
-                     //TODO : set role
-                     if(admins.contains(userAttributes.get("name"))){
-                         mappedAuthorities.addAll(AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
-                     }
+                    //TODO : set role
+                    if (admins.contains(userAttributes.get("login"))) {
+                        mappedAuthorities.addAll(AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+                    } else {
+                        mappedAuthorities.addAll(AuthorityUtils.createAuthorityList("ROLE_USER"));
+                    }
                 }
             });
             return mappedAuthorities;
