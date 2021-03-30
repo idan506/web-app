@@ -15,7 +15,7 @@ $("#imgInp").change(function () {
   readURL(this);
 });
 
-$('#btnCreate').click(() => {
+$('#btnCreate').click((event) => {
   let dataToPost = {
     name: document.getElementById("name").value,
     isbn: document.getElementById("isbn").value,
@@ -27,14 +27,13 @@ $('#btnCreate').click(() => {
     image: document.getElementById("blah").src,
     flag: true
   };
-  console.log(dataToPost);
   $.ajax({
     url: '/api/books',
     type: 'POST',
     dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify(dataToPost),
-    success: (response) => {
+    success: () => {
       window.location = '/admin/books-list.html';
     }
   });

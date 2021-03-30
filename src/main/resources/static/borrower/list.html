@@ -15,9 +15,9 @@
 
   <!-- Custom styles for this template -->
   <link href="css/shop-homepage.css" rel="stylesheet">
-   
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
-  
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 </head>
 
@@ -61,42 +61,42 @@
 
       </div>
       <!-- /.col-lg-3 -->
-      
+
       <div class="col-lg-9">
         <div class="row">
 
           <div class="input-group col-md-3 py-3">
             <input type="search" class="form-control rounded" placeholder="Search title" aria-label="Search"
-              aria-describedby="search-addon" id="searchName"/>
+              aria-describedby="search-addon" id="searchName" />
           </div>
           <div class="input-group col-md-3 py-3">
             <input type="search" class="form-control rounded" placeholder="Search ISBN" aria-label="Search"
-              aria-describedby="search-addon" id="searchISBN"/>
+              aria-describedby="search-addon" id="searchISBN" />
           </div>
           <div class="input-group col-md-3 py-3">
             <input type="search" class="form-control rounded" placeholder="Search Publish Year" aria-label="Search"
-              aria-describedby="search-addon" id="searchPublishYear"/>
+              aria-describedby="search-addon" id="searchPublishYear" />
           </div>
           <div class="input-group col-md-3 py-3">
             <input type="search" class="form-control rounded" placeholder="Search author" aria-label="Search"
-              aria-describedby="search-addon" id="searchAuthor"/>
+              aria-describedby="search-addon" id="searchAuthor" />
           </div>
           <div class="input-group col-md-3 py-3">
             <input type="search" class="form-control rounded" placeholder="Search total ticket" aria-label="Search"
-              aria-describedby="search-addon" id="searchTotalTichket"/>
+              aria-describedby="search-addon" id="searchTotalTichket" />
           </div>
 
           <div class="input-group col-md-6 py-3">
             <textarea class="form-control rounded" placeholder="Search short description" aria-label="Search"
               aria-describedby="search-addon" id="searchShortDescription" rows="1"></textarea>
           </div>
-          <div class="input-grou col-md-1 py-3" >
+          <div class="input-grou col-md-1 py-3">
             <button type="button" class="btn btn-primary" id="btnSearch">
               Search
             </button>
           </div>
-        <div>&nbsp;&nbsp;</div>
-          <div class="input-grou col-md-1 py-3" >
+          <div>&nbsp;&nbsp;</div>
+          <div class="input-grou col-md-1 py-3">
             <button type="button" class="btn btn-danger" id="btnBorrow">
               Borrow
             </button>
@@ -137,16 +137,17 @@
               <a href="#"><img class="card-img-top" src="${item.image}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="/borrower/bookdetail.html?id=${item.id}">${item.name}</a>
+                  <a">${item.name}</a>
                 </h4>
                 <h5>Author: ${item.author}</h5>
                 <h6>Publish year: ${item.publishYear}</h6>
                 <h6>Quantity: ${item.quantity}</h6>
                 <p class="card-text">${item.shortDescription}</p>
-              </div>
-              <div class="card-foot">
+                <div class="card-foot">
                 <input class="form-check-input" type="checkbox" id="checkbox${item.id}" value="${item.id}" aria-label="...">
               </div>
+              </div>
+              
             </div>
           </div>`;
         });
@@ -224,15 +225,15 @@
       })
     })
 
-    
+
   </script>
   <script type="text/javascript">
-    $.get("/user", function(data) {
-        $("#user").html(data.name);
-        $(".unauthenticated").hide()
-        $(".authenticated").show()
+    $.get("/user", function (data) {
+      $("#user").html(data.name);
+      $(".unauthenticated").hide()
+      $(".authenticated").show()
     });
-</script>
+  </script>
 </body>
 
 </html>

@@ -11,45 +11,48 @@ $.ajax({
         document.getElementById("isbn").value = response.isbn;
         document.getElementById("publishing_year").value = response.publishYear;
         document.getElementById("shortDescrpition").value = response.shortDescription;
-        document.getElementById("image").value = response.image;
+        document.getElementById("quantity").value = response.quantity;
     }
 });
+
 $('#submitBtn').click(() => {
     let dataToPost = {
         name: document.getElementById("name").value,
         id: $.urlParam('id'),
         isbn: document.getElementById("isbn").value,
         flag: true,
-        status:true,
+        status: true,
         author: document.getElementById("author").value,
         shortDescription: document.getElementById("shortDescrpition").value,
         image: document.getElementById("blah").src,
-        publishYear: document.getElementById("publishing_year").value
+        publishYear: document.getElementById("publishing_year").value,
+        quantity: document.getElementById("quantity").value
     };
-    console.log(dataToPost);
     $.ajax({
         url: '/api/books',
         type: 'PUT',
         dataType: 'json',
-        contentType : 'application/json',
+        contentType: 'application/json',
         data: JSON.stringify(dataToPost),
-        success: (response) => {
-            window.location='/admin/books-list.html';
+        success: () => {
+            alert("successful")
+            window.location = '/admin/books-list.html';
         }
     });
 })
+
 function readURL(input) {
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      
-      reader.onload = function(e) {
-        $('#blah').attr('src', e.target.result);
-      }
-      
-      reader.readAsDataURL(input.files[0]); // convert to base64 string
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
-  }
-  
-  $("#imgInp").change(function() {
+}
+
+$("#imgInp").change(function () {
     readURL(this);
-  });
+});
