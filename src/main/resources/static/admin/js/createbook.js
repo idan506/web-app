@@ -34,6 +34,7 @@ $('#btnCreate').click((event) => {
     contentType: 'application/json',
     data: JSON.stringify(dataToPost),
     success: () => {
+      alert("successful");
       window.location = '/admin/books-list.html';
     }
   });
