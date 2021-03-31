@@ -42,9 +42,6 @@
             shortDescription: document.getElementById("searchShortDescription").value
             
         }
-
-        console.log(dataToSearch);
-
         $.ajax({
             url: '/api/books/search',
             type:'POST',

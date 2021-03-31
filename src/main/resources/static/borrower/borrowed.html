@@ -63,7 +63,7 @@
         <table class="table" id="dataTable">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">Books</th>
+                <th scope="col">ID</th>
                 <th scope="col">Day Of Hire</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
@@ -88,7 +88,7 @@
         var trHTML = '';
             $.each(response, function (i, item) {
                 trHTML += '<tr><td>' 
-                    + 111 + '</td><td>' + item.dateOfHire + '</td><td>'  + item.status + '</td><td>' +
+                    + item.id + '</td><td>' + item.dayOfHire + '</td><td>'  + item.status + '</td><td>' +
                      '<button class="btn btn-danger" onclick="btnCheckout('+item.id+')" id="btnCheckout" value="'+item.id+'">Check out</button>' + '</td></tr>';
             });
           $('#dataTable').append(trHTML);

@@ -15,7 +15,8 @@ $.ajax({
     }
 });
 
-$('#submitBtn').click(() => {
+$('#submitBtn').click((event) => {
+    event.preventDefault();
     let dataToPost = {
         name: document.getElementById("name").value,
         id: $.urlParam('id'),

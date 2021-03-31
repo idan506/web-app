@@ -16,6 +16,7 @@ $("#imgInp").change(function () {
 });
 
 $('#btnCreate').click((event) => {
+  event.preventDefault();
   let dataToPost = {
     name: document.getElementById("name").value,
     isbn: document.getElementById("isbn").value,
